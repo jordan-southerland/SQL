@@ -1,0 +1,35 @@
+This project utilized data from the Netflix database stored at http://sqlfiddle.com/#!17/7dae0
+
+#Using the PostgreSQL dialect, write a join to select a few columns from both tables at the same time.
+SELECT nt.show_id, title, director, release_year
+FROM "netflix_titles_info" AS nt
+JOIN "netflix_people" AS np
+ON nt.show_id=np.show_id;
+
+#How many movie titles are there in the database? (movies only, not tv shows)
+SELECT COUNT(show_id)
+FROM "netflix_titles_info"
+WHERE type='Movie';
+
+#When was the most recent batch of tv shows and/or movies added to the database?
+SELECT MAX(date(date_added))
+FROM "netflix_titles_info";
+
+#List all the movies and tv shows in alphabetical order.
+SELECT title
+FROM "netflix_titles_info"
+ORDER BY title asc;
+
+#Who was the Director for the movie The Starling?
+SELECT director
+FROM "netflix_people" np
+JOIN "netflix_titles_info" nti
+ON np.show_id=nti.show_id
+WHERE nti.title='The Starling';
+
+#What is the oldest movie in the database and what year was it made?
+SELECT title, release_year
+FROM "netflix_titles_info" 
+WHERE type='Movie'
+ORDER BY release_year asc
+LIMIT 1;

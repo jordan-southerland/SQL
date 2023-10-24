@@ -1,6 +1,6 @@
 This project utilized data from the Netflix database stored at http://sqlfiddle.com/#!17/7dae0
 
-#Using the PostgreSQL dialect, write a join to select a few columns from both tables at the same time.
+#Using the PostgreSQL dialect, write a join to select a few columns from both tables at the same time. 
 SELECT nt.show_id, title, director, release_year
 FROM "netflix_titles_info" AS nt
 JOIN "netflix_people" AS np

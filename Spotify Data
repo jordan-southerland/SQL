@@ -40,3 +40,14 @@ ORDER BY (popularity) desc LIMIT 10
 #I determined which song is the longest and who the artist is
 SELECT MAX(duration_ms), artist_name, track_name
 FROM spotifydata
+
+#Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, label them as a “Top Star”.
+WITH AvgPopCTE AS(
+SELECT artist_name, AVG(popularity) AS Popularity
+FROM spotifydata
+GROUP BY artist_name )
+
+SELECT artist_name, Popularity, 
+CASE WHEN popularity >= 90 THEN 'Top Star' ELSE NULL
+END AS Status
+FROM AvgPopCTE;

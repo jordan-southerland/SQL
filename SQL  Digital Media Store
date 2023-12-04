@@ -67,7 +67,7 @@ ON C.customerID=I.customerId
 JOIN chinook.employees E
 ON E.employeeId= C.SupportRepId
 WHERE e.Title = 'Sales Support Agent'
-Group By E.Lastname;
+GROUP BY E.Lastname;
 
 --Which sales agent made the most dollars in sales in 2009?*/
 SELECT E.FirstName, E.LastName, ROUND(SUM(total),2)AS TotalSales FROM invoices I
@@ -77,5 +77,5 @@ JOIN chinook.employees E
 ON E.employeeId= C.SupportRepId
 WHERE e.title = 'Sales Support Agent'
 AND I.invoiceDate LIKE '2009%'
-Group By E.Lastname
+GROUP BY E.Lastname
 ORDER BY TotalSales desc LIMIT 1;

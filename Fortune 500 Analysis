@@ -73,7 +73,8 @@ GROUP BY industry
 ORDER BY avg_employee_tenure desc;
 
 ##which companies with at least 5000 employees have the best employee retention##
-SELECT company_id, company_name, 
+SELECT company_id, company_name
+FROM fortune_companies
 CASE WHEN avg_employee_tenure>7 
 THEN 'Great Employee Retention'
 WHEN avg_employee_tenure>5 

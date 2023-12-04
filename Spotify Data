@@ -44,10 +44,13 @@ FROM spotifydata
 #Use a CTE to calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, label them as a “Top Star”.
 WITH AvgPopCTE AS(
 SELECT artist_name, AVG(popularity) AS Popularity
-FROM spotifydata
+FROM Spotifydata
 GROUP BY artist_name )
 
-SELECT artist_name, Popularity, 
-CASE WHEN popularity >= 90 THEN 'Top Star' ELSE NULL
+SELECT artist_name, Popularity
+FROM Spotifydata
+CASE WHEN popularity >= 90 
+THEN 'Top Star' 
+ELSE NULL
 END AS Status
 FROM AvgPopCTE;

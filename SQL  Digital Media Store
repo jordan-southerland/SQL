@@ -1,27 +1,34 @@
 ##Here i have written queries that correspond to a Database that respresent a digital media store and includes tables for artists, albums, media tracks, invoices, customers, and employee represenatives.
 
 --Show Customers (their full names, customer ID, and country) who are not in the US.--
-SELECT FirstName, LastName, CustomerId, Country FROM chinook.customers
+SELECT FirstName, LastName, CustomerId, Country 
+FROM chinook.customers
 WHERE COUNTRY <> 'USA';
 
 --Show only the Customers from Brazil.--
-SELECT FirstName, LastName, CustomerId, Country FROM chinook.customers
+SELECT FirstName, LastName, CustomerId, Country 
+FROM chinook.customers
 WHERE Country = 'Brazil';
 
 -- Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.--
-SELECT FirstName, LastName, InvoiceId, InvoiceDate, BillingCountry FROM chinook.invoices
-JOIN chinook.customers ON customers.CustomerId = invoices.CustomerId
+SELECT FirstName, LastName, InvoiceId, InvoiceDate, BillingCountry 
+FROM chinook.invoices
+JOIN chinook.customers 
+ON customers.CustomerId = invoices.CustomerId
 WHERE BillingCountry = 'Brazil';
 
 --Show the Employees who are Sales Agents.--
-SELECT FirstName, LastName, EmployeeId FROM chinook.employees
+SELECT FirstName, LastName, EmployeeId 
+FROM chinook.employees
 WHERE Title = 'Sales Support Agent';
 
 --Find a unique/distinct list of billing countries from the Invoice table.
-SELECT DISTINCT BillingCountry FROM chinook.invoices;
+SELECT DISTINCT BillingCountry 
+FROM chinook.invoices;
 
 --Provide a query that shows the invoices associated with each sales agent. The resulting table should include the Sales Agent's full name.
-SELECT InvoiceId, E.FirstName, E.LastName, E.EmployeeId FROM chinook.invoices I 
+SELECT InvoiceId, E.FirstName, E.LastName, E.EmployeeId 
+FROM chinook.invoices I 
 LEFT JOIN customers C
 ON I.CustomerId = C.CustomerId
 LEFT JOIN employees E
@@ -30,38 +37,46 @@ ON E.EmployeeId = C.SupportRepId;
 --Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers--*/
 SELECT E.FirstName AS SAFirstName, E.LastName AS SALastName, C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName, I.BillingCountry AS Country, I.Total 
 FROM chinook.Employees E
-JOIN chinook.customers C ON E.employeeId = C.SupportRepId
-JOIN chinook.invoices I ON I.CustomerId = C.CustomerId;
+JOIN chinook.customers C 
+ON E.employeeId = C.SupportRepId
+JOIN chinook.invoices I 
+ON I.CustomerId = C.CustomerId;
 
 --How many Invoices were there in 2009?
-SELECT COUNT(invoiceId) AS Invoices2009 FROM chinook.invoices
+SELECT COUNT(invoiceId) AS Invoices2009 
+FROM chinook.invoices
 WHERE invoiceDate LIKE '2009%';
 
 --What are the total sales for 2009?
-SELECT ROUND(SUM(Total),2) AS TotalSales FROM invoices
+SELECT ROUND(SUM(Total),2) AS TotalSales 
+FROM invoices
 WHERE invoiceDate LIKE '2009%';
 
 --Write a query that includes the purchased track name with each invoice line ID.--
-SELECT T.Name, I.InvoiceLineId FROM chinook.Tracks T
+SELECT T.Name, I.InvoiceLineId 
+FROM chinook.Tracks T
 JOIN chinook.invoice_items I
 ON T.trackId= I.TrackId;
 
 --Write a query that includes the purchased track name AND artist name with each invoice line ID.
-SELECT T.Name, T.Composer, I.invoiceLineId FROM chinook.Tracks T
+SELECT T.Name, T.Composer, I.invoiceLineId 
+FROM chinook.Tracks T
 JOIN chinook.invoice_items I
 ON T.trackId= I.TrackId;
 
 --Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
-SELECT T.Name, A.Title AS Album, MT.name AS MediaType, G.name AS Genre FROM chinook.Tracks T
+SELECT T.Name, A.Title AS Album, MT.name AS MediaType, G.name AS Genre 
+FROM chinook.Tracks T
 LEFT JOIN chinook.albums A
-On A.AlbumID= T.albumId
+ON A.AlbumID= T.albumId
 LEFT JOIN chinook.media_types MT
 ON MT.mediaTypeId= T.mediaTypeId
 LEFT JOIN chinook.genres G
 ON G.genreId= T.genreID;
 
 --Show the total sales made by each sales agent.
-SELECT E.FirstName, E.LastName, SUM(total)AS TotalSales FROM invoices I
+SELECT E.FirstName, E.LastName, SUM(total)AS TotalSales 
+FROM invoices I
 JOIN customers C
 ON C.customerID=I.customerId
 JOIN chinook.employees E
@@ -70,7 +85,8 @@ WHERE e.Title = 'Sales Support Agent'
 GROUP BY E.Lastname;
 
 --Which sales agent made the most dollars in sales in 2009?*/
-SELECT E.FirstName, E.LastName, ROUND(SUM(total),2)AS TotalSales FROM invoices I
+SELECT E.FirstName, E.LastName, ROUND(SUM(total),2)AS TotalSales 
+FROM invoices I
 JOIN customers C
 ON C.customerID=I.customerId
 JOIN chinook.employees E

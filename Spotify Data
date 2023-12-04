@@ -34,7 +34,8 @@ FROM Spotifydata
 GROUP BY artist_name, track_name
 
 #I determined who the Top 10 artists are by popularity
-SELECT artist_name, popularity FROM Spotifydata
+SELECT artist_name, popularity 
+FROM Spotifydata
 ORDER BY (popularity) desc LIMIT 10
 
 #I determined which song is the longest and who the artist is

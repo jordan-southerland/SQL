@@ -31,22 +31,22 @@ time_signature integer NOT NULL
 #I determined the avg danceability by artist and track. 
 SELECT artist_name, track_name, AVG(danceability)
 FROM Spotifydata
-GROUP BY artist_name, track_name
+GROUP BY artist_name, track_name;
 
 #I determined who the Top 10 artists are by popularity
 SELECT artist_name, popularity 
 FROM Spotifydata
-ORDER BY (popularity) desc LIMIT 10
+ORDER BY (popularity) desc LIMIT 10;
 
 #I determined which song is the longest and who the artist is
 SELECT MAX(duration_ms), artist_name, track_name
-FROM spotifydata
+FROM spotifydata;
 
 #Use a CTE to calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, label them as a “Top Star”.
 WITH AvgPopCTE AS(
 SELECT artist_name, AVG(popularity) AS Popularity
 FROM Spotifydata
-GROUP BY artist_name )
+GROUP BY artist_name)
 
 SELECT artist_name, Popularity
 FROM Spotifydata

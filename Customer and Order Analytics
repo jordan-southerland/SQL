@@ -3,14 +3,14 @@
 #How many orders were placed in January?
 SELECT COUNT(orderid)
 FROM BIT_DB.JanSales
-WHERE length(orderid)=6
+WHERE length(orderid) = 6
 AND orderid <> 'OrderID';
 
 #How many of those orders were for an iPhone?
 SELECT COUNT(orderid)
 FROM BIT_DB.JanSales
 WHERE Product = 'iPhone'
-AND length(orderid)=6
+AND length(orderid) = 6
 AND orderid <> 'OrderID';
 
 #Select the customer account numbers for all the orders that were placed in February. 
@@ -42,8 +42,8 @@ SELECT COUNT(distinct C.acctnum) AS Orders , AVG(Quantity*price) AS Average_Spen
 FROM BIT_DB.FebSales FS
 LEFT JOIN BIT_DB.customers C
 ON C.order_id = FS.orderid
-WHERE FS.Quantity>2
-AND length(C.order_id)=6
+WHERE FS.Quantity > 2
+AND length(C.order_id) = 6
 AND orderID <> 'OrderID';
 
 #List all the products sold in Los Angeles in February, and include how many of each were sold.
@@ -55,7 +55,7 @@ GROUP BY Product;
 #Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
 SELECT location, count(orderID)AS Orders
 FROM BIT_DB.JanSales 
-WHERE length(orderID) =6
+WHERE length(orderID) = 6
 AND orderID <> 'OrderID'
 AND location LIKE '%New York%'
 GROUP BY location
@@ -71,7 +71,7 @@ GROUP BY Product;
 SELECT AVG(quantity*price)
 FROM BIT_DB.FebSales FS
 LEFT JOIN BIT_DB.customers cust
-ON cust.order_id=FS.orderID
+ON cust.order_id = FS.orderID
 WHERE length(FS.orderid) = 6 
 AND FS.orderid <> 'Order ID';
 
@@ -79,7 +79,7 @@ AND FS.orderid <> 'Order ID';
 SELECT SUM(Quantity)/COUNT(acctnum)
 FROM FebSales FS
 LEFT JOIN customers cust
-ON cust.order_id=FS.orderID
+ON cust.order_id = FS.orderID
 WHERE length(FS.orderid) = 6 
 AND FS.orderid <> 'Order ID';
 

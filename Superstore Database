@@ -33,11 +33,11 @@ FROM superstore
 ORDER BY price desc;
 
 #Show a statistic about the item prices for a category
-SELECT AVG(price),category
+SELECT AVG(price), category
 FROM superstore
-WHERE category='Appliances';
+WHERE category = 'Appliances';
 
 #Show the stock of an item 
-SELECT (stock_quantity),item_name
+SELECT (stock_quantity), item_name
 FROM superstore
-WHERE item_name='Air Purifier';
+WHERE item_name = 'Air Purifier';

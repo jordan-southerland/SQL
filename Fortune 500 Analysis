@@ -61,10 +61,10 @@ VALUES
 ##Im applying for a job and would like to see the companies with the greatest benefit packages##
 SELECT company_name, CASE WHEN healthcare_benefits=1 THEN "available" END AS benefits, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure
 FROM fortune_companies 
-WHERE healthcare_benefits=1 
-AND paid_time_off_days>=14 
-AND maternity_leave_weeks>=12 
-AND avg_employee_tenure>5;
+WHERE healthcare_benefits = 1 
+AND paid_time_off_days >= 14 
+AND maternity_leave_weeks >= 12 
+AND avg_employee_tenure > 5;
 
 ##Which industries do employess stay the longest?##
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS Avg_Employee_Tenure
@@ -75,14 +75,14 @@ ORDER BY avg_employee_tenure desc;
 ##which companies with at least 5000 employees have the best employee retention##
 SELECT company_id, company_name
 FROM fortune_companies
-CASE WHEN avg_employee_tenure>7 
+CASE WHEN avg_employee_tenure > 7 
 THEN 'Great Employee Retention'
-WHEN avg_employee_tenure>5 
+WHEN avg_employee_tenure > 5 
 THEN 'Good Employee Retention'
 ELSE 'Fair employee retention'
 END AS employee_retention
 FROM fortune_companies
-WHERE employees>=5000;
+WHERE employees >= 5000;
 
 ##Show the total and average revenues for each industry##
 SELECT industry, ROUND(AVG(revenue))AS average_revenue, ROUND(SUM(revenue))AS total_revenue
@@ -94,4 +94,4 @@ ORDER BY average_revenue desc;
 SELECT industry, ROUND(AVG(revenue))AS Average_Revenue
 FROM fortune_companies
 GROUP BY industry
-HAVING healthcare_benefits=1
+HAVING healthcare_benefits = 1;
